@@ -1,0 +1,8 @@
+<h1>Esqueceu a Senha?</h1>
+
+<%= form_with url: forgot_password_path, local: true do |form| %>
+  <%= form.label :email %>
+  <%= form.email_field :email %>
+
+  <%= form.submit 'Enviar Instruções' %>
+<% end %>

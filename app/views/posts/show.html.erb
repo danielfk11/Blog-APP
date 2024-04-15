@@ -1,0 +1,15 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.content %></p>
+
+<h2>Comentários</h2>
+<% @post.comments.each do |comment| %>
+  <div>
+    <p><%= comment.content %></p>
+  </div>
+<% end %>
+
+<h3>Adicionar Comentário</h3>
+<%= form_with model: [@post, @post.comments.build], local: true do |form| %>
+  <%= form.text_area :content, placeholder: 'Digite seu comentário' %>
+  <%= form.submit 'Comentar' %>
+<% end %>

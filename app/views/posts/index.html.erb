@@ -1,0 +1,16 @@
+<h1>Lista de Posts</h1>
+
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <h2><%= link_to post.title, post %></h2>
+    <p><%= truncate(strip_tags(post.content), length: 200) %></p>
+    <p><%= link_to 'Ver mais', post %></p>
+    <hr>
+  <% end %>
+
+  <%= will_paginate @posts %>
+<% else %>
+  <p>Ainda não há posts para mostrar. Seja o primeiro a criar um!</p>
+<% end %>
+
+<%= link_to 'Novo Post', new_post_path, class: 'btn btn-primary' if user_signed_in? %>

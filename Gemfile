@@ -11,6 +11,12 @@ gem "sprockets-rails"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
+# Devise for auth
+gem 'devise'
+
+# will_paginate for Paginate
+gem 'will_paginate', '~> 3.3'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
