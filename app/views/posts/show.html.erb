@@ -29,5 +29,21 @@
 <%= link_to 'Editar', edit_post_path(@post) if user_signed_in? %>
 <%= link_to 'Voltar', posts_path %>
 
+<h2>Comentários</h2>
+
+<% @post.comments.each do |comment| %>
+  <div>
+    <p><strong><%= comment.user.username %>:</strong> <%= comment.content %></p>
+  </div>
+<% end %>
+
+<% if user_signed_in? %>
+  <h3>Adicionar Comentário</h3>
+  <%= form_with model: [@post, @post.comments.build] do |form| %>
+    <%= form.text_area :content, placeholder: 'Seu comentário aqui...', class: 'form-control' %>
+    <%= form.submit 'Comentar', class: 'btn btn-primary mt-2' %>
+  <% end %>
+<% end %>
+
 </body>
 </html>

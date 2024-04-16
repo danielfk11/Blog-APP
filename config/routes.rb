@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    resources :comments, only: [:create]
-  end
+    resources :comments, only: [:create, :edit, :update, :destroy]
+  end  
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :users, only: [:new, :create, :edit, :update]

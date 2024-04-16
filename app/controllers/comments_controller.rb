@@ -1,15 +1,35 @@
-def create
-    @comment = Comment.new(comment_params)
+class CommentsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_post, only: [:create]
+  before_action :set_comment, only: [:destroy]
+
+  def create
+    @comment = @post.comments.new(comment_params)
+    @comment.user = current_user
+    
     if @comment.save
-      redirect_to post_path(@comment.post), notice: 'Comentário criado com sucesso!'
+      redirect_to @post, notice: 'Comentário adicionado com sucesso!'
     else
-      redirect_to post_path(@comment.post), alert: 'Erro ao criar o comentário.'
+      redirect_to @post, alert: 'Falha ao adicionar comentário!'
     end
   end
-  
-  private
-  
-  def comment_params
-    params.require(:comment).permit(:content, :post_id)
+
+  def destroy
+    @comment.destroy
+    redirect_to @post, notice: 'Comentário removido com sucesso!'
   end
-  
+
+  private
+
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
+end
