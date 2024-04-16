@@ -17,6 +17,9 @@ gem 'devise'
 # will_paginate for Paginate
 gem 'will_paginate', '~> 3.3'
 
+# SMS
+gem 'twilio-ruby'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 

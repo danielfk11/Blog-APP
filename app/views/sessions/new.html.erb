@@ -7,9 +7,9 @@
 
 <h1>Login</h1>
 
-<%= form_with model: @user, local: true do |form| %>
+<%= form_for(@user, as: :user, url: session_path(:user)) do |form| %>
   <%= form.label :email %>
-  <%= form.email_field :email %>
+  <%= form.email_field :email, autofocus: true %>
 
   <%= form.label :password %>
   <%= form.password_field :password %>
