@@ -1,3 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Seu Blog</title>
+</head>
+<body>
+<%= csrf_meta_tags %>
+
+<nav>
+  <ul>
+    <% if user_signed_in? %>
+      <li><%= link_to "Meus Posts", posts_path %></li>
+      <li>
+        <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+      </li>
+    <% else %>
+      <li><%= link_to "Login", login_path %></li>
+      <li><%= link_to "Cadastrar-se", new_user_path %></li>
+    <% end %>
+  </ul>
+</nav>
+
 <h1>Lista de Posts</h1>
 
 <% if @posts.any? %>
@@ -14,3 +36,6 @@
 <% end %>
 
 <%= link_to 'Novo Post', new_post_path, class: 'btn btn-primary' if user_signed_in? %>
+
+</body>
+</html>

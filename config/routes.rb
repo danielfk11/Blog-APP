@@ -1,16 +1,23 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'custom_sessions'
+  }
 
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Deslogado: 
+  devise_scope :user do
+    delete "/logout" => "sessions#destroy", as: :logout
+  end
+
+  # Deslogado:
   root 'posts#index'
 
-  resources :posts, only: [:index, :show] do
+  resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :comments, only: [:create]
   end
 
-  resources :users, only: [:new, :create]
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create, :edit, :update]
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
@@ -25,3 +32,4 @@ Rails.application.routes.draw do
   resources :posts, except: [:index, :show]
   resources :users, only: [:edit, :update]
 end
+
