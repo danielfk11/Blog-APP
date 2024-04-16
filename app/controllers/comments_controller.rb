@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.new(comment_params)
-    @comment.user = current_user
+    @comment.user = current_user unless params[:comment][:anonymous] == 'true'
     
     if @comment.save
       redirect_to @post, notice: 'Comentário adicionado com sucesso!'
@@ -13,6 +13,8 @@ class CommentsController < ApplicationController
       redirect_to @post, alert: 'Falha ao adicionar comentário!'
     end
   end
+  
+
 
   def destroy
     @comment = @post.comments.find(params[:id])

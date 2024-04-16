@@ -26,6 +26,10 @@
 <p>Criado por: <%= @post.user.username %></p>
 <p>Data de criação: <%= @post.created_at.strftime('%d/%m/%Y %H:%M') %></p>
 
+<% if @post.updated_at != @post.created_at %>
+  <p style="color: red;">(editado)</p>
+<% end %>
+
 <%= link_to 'Editar', edit_post_path(@post) if user_signed_in? %>
 <%= link_to 'Voltar', posts_path %>
 
@@ -33,8 +37,8 @@
 
 <% @post.comments.each do |comment| %>
   <div>
-    <p><strong><%= comment.user.username %>:</strong> <%= comment.content %></p>
-    <% if user_signed_in? && comment.user == current_user %>
+    <p><strong><%= comment.user&.username || 'Anônimo' %>:</strong> <%= comment.content %></p>
+    <% if user_signed_in? && (comment.user == current_user || comment.anonymous) %>
       <%= form_for [@post, comment], method: :delete, remote: true, data: { confirm: 'Tem certeza que deseja remover este comentário?' } do |f| %>
         <%= f.submit 'Remover', class: 'btn btn-danger btn-sm' %>
       <% end %>
@@ -47,7 +51,11 @@
   <%= form_with model: [@post, @post.comments.build] do |form| %>
     <%= form.text_area :content, placeholder: 'Seu comentário aqui...', class: 'form-control' %>
     <%= form.submit 'Comentar', class: 'btn btn-primary mt-2' %>
+    <%= form.hidden_field :anonymous, value: 'true' %>
+    <%= form.submit 'Comentar Anônimo', class: 'btn btn-secondary mt-2' %>
   <% end %>
+<% else %>
+  <p>Por favor, faça login para comentar.</p>
 <% end %>
 
 </body>
