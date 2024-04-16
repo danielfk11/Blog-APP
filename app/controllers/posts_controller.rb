@@ -23,15 +23,24 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = current_user.posts.find_by(id: params[:id])
+    unless @post
+      redirect_to posts_path, alert: 'Você não tem permissão para editar este post.'
+    end
   end
+  
 
   def update
+    @post = current_user.posts.find(params[:id])
     if @post.update(post_params)
       redirect_to @post, notice: 'Post atualizado com sucesso!'
     else
       render :edit
     end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to posts_path, alert: 'Você não tem permissão para editar este post.'
   end
+  
 
   def destroy
     @post.destroy
@@ -44,6 +53,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  
   def post_params
     params.require(:post).permit(:title, :content)
   end
