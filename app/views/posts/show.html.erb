@@ -37,7 +37,7 @@
 
 <% @post.comments.each do |comment| %>
   <div>
-    <p><strong><%= comment.user&.username || 'Anônimo' %>:</strong> <%= comment.content %></p>
+    <p><strong><%= comment.anonymous ? 'Anônimo' : comment.user.username %>:</strong> <%= comment.content %></p>
     <% if user_signed_in? && (comment.user == current_user || comment.anonymous) %>
       <%= form_for [@post, comment], method: :delete, remote: true, data: { confirm: 'Tem certeza que deseja remover este comentário?' } do |f| %>
         <%= f.submit 'Remover', class: 'btn btn-danger btn-sm' %>
@@ -46,17 +46,22 @@
   </div>
 <% end %>
 
+
 <% if user_signed_in? %>
   <h3>Adicionar Comentário</h3>
   <%= form_with model: [@post, @post.comments.build] do |form| %>
     <%= form.text_area :content, placeholder: 'Seu comentário aqui...', class: 'form-control' %>
+    
+    <!-- Checkbox para definir se o comentário é anônimo -->
+    <%= form.check_box :anonymous %>
+    <%= form.label :anonymous, 'Comentar Anônimo' %>
+    
     <%= form.submit 'Comentar', class: 'btn btn-primary mt-2' %>
-    <%= form.hidden_field :anonymous, value: 'true' %>
-    <%= form.submit 'Comentar Anônimo', class: 'btn btn-secondary mt-2' %>
   <% end %>
 <% else %>
   <p>Por favor, faça login para comentar.</p>
 <% end %>
+
 
 </body>
 </html>
