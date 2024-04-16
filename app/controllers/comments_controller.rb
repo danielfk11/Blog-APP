@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: [:create]
+  before_action :set_post, only: [:create, :destroy]  # Adicionado :destroy aqui
   before_action :set_comment, only: [:destroy]
 
   def create
@@ -15,9 +15,16 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
-    redirect_to @post, notice: 'Comentário removido com sucesso!'
+    @comment = @post.comments.find(params[:id])
+    
+    if @comment.user == current_user
+      @comment.destroy
+      redirect_to @post, notice: 'Comentário removido com sucesso!'
+    else
+      redirect_to @post, alert: 'Você não tem permissão para remover este comentário!'
+    end
   end
+  
 
   private
 
