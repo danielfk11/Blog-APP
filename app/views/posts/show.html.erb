@@ -1,11 +1,33 @@
-<% if @post %>
-  <h1><%= @post.title %></h1>
-  <p><%= @post.content %></p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @post.title %></title>
+</head>
+<body>
+<%= csrf_meta_tags %>
 
-  <h2>Comentários</h2>
-  <% @post.comments.each do |comment| %>
-    <div>
-      <p><%= comment.content %></p>
-    </div>
-  <% end %>
-<% end %>
+<nav>
+  <ul>
+    <% if user_signed_in? %>
+      <li><%= link_to "Meus Posts", posts_path %></li>
+      <li>
+        <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+      </li>
+    <% else %>
+      <li><%= link_to "Login", login_path %></li>
+      <li><%= link_to "Cadastrar-se", new_user_path %></li>
+    <% end %>
+  </ul>
+</nav>
+
+<h1><%= @post.title %></h1>
+
+<p><%= @post.content %></p>
+<p>Criado por: <%= @post.user.username %></p>
+<p>Data de criação: <%= @post.created_at.strftime('%d/%m/%Y %H:%M') %></p>
+
+<%= link_to 'Editar', edit_post_path(@post) if user_signed_in? %>
+<%= link_to 'Voltar', posts_path %>
+
+</body>
+</html>
