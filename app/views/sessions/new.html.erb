@@ -1,6 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+
 <h1>Login</h1>
 
-<%= form_with url: login_path, local: true do |form| %>
+<%= form_with model: @user, local: true do |form| %>
   <%= form.label :email %>
   <%= form.email_field :email %>
 
@@ -9,3 +16,11 @@
 
   <%= form.submit 'Login' %>
 <% end %>
+
+<!-- Adicionar link para recuperação de senha -->
+<p>
+  <%= link_to 'Esqueceu sua senha?', new_user_password_path %>
+</p>
+
+</body>
+</html>

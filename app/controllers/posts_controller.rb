@@ -43,8 +43,12 @@ class PostsController < ApplicationController
   
 
   def destroy
-    @post.destroy
-    redirect_to posts_path, notice: 'Post deletado com sucesso!'
+    if @post.user == current_user
+      @post.destroy
+      redirect_to posts_path, notice: 'Post removido com sucesso!'
+    else
+      redirect_to @post, alert: 'Você não tem permissão para remover este post!'
+    end
   end
 
   private

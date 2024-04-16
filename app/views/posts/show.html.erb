@@ -30,6 +30,11 @@
   <p style="color: red;">(editado)</p>
 <% end %>
 
+<!-- Botão para apagar o post -->
+<% if user_signed_in? && @post.user == current_user %>
+  <%= button_to 'Apagar Post', @post, method: :delete, data: { confirm: 'Tem certeza que deseja apagar este post?' }, class: 'btn btn-danger' %>
+<% end %>
+
 <%= link_to 'Editar', edit_post_path(@post) if user_signed_in? %>
 <%= link_to 'Voltar', posts_path %>
 
@@ -46,7 +51,6 @@
   </div>
 <% end %>
 
-
 <% if user_signed_in? %>
   <h3>Adicionar Comentário</h3>
   <%= form_with model: [@post, @post.comments.build] do |form| %>
@@ -61,7 +65,6 @@
 <% else %>
   <p>Por favor, faça login para comentar.</p>
 <% end %>
-
 
 </body>
 </html>
