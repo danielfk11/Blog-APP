@@ -1,0 +1,16 @@
+<!-- app/views/passwords/verify_token.html.erb -->
+<h2>Verificar Token</h2>
+
+<%= form_tag validate_token_path do %>
+  <div class="field">
+    <%= label_tag :email, 'Email' %>
+    <%= text_field_tag :email, params[:email] %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :token, 'Token' %>
+    <%= text_field_tag :token, params[:token] %>
+  </div>
+
+  <%= submit_tag 'Verificar Token' %>
+<% end %>

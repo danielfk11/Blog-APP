@@ -1,8 +1,16 @@
-<h1>Esqueceu a Senha?</h1>
+<!-- app/views/passwords/new.html.erb -->
 
-<%= form_with url: forgot_password_path, local: true do |form| %>
-  <%= form.label :email %>
-  <%= form.email_field :email %>
+<h2>Forgot your password?</h2>
 
-  <%= form.submit 'Enviar Instruções' %>
-<% end %>
+<form class="new_user" id="new_user" action="/forgot_password" accept-charset="UTF-8" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+
+  <div class="field">
+    <label for="user_phone_number">Phone Number</label><br />
+    <input autofocus="autofocus" autocomplete="tel" type="tel" name="phone_number" id="user_phone_number" />
+  </div>
+
+  <div class="actions">
+    <input type="submit" name="commit" value="Send me reset password instructions" data-disable-with="Send me reset password instructions" />
+  </div>
+</form>
