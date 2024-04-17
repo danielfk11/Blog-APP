@@ -1,0 +1,19 @@
+<h1>Meu Perfil</h1>
+
+<p><strong>Username:</strong> <%= @user.username %></p>
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>Phone Number:</strong> <%= @user.phone_number %></p>
+
+<h2>Meus Posts</h2>
+
+<ul>
+  <% @user.posts.each do |post| %>
+    <li>
+      <%= link_to post.title, post_path(post) %>
+      <!-- Adicione outros detalhes do post, se necessário -->
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Editar Perfil', edit_user_path(@user) %> |
+<%= link_to 'Editar Senha', edit_password_user_path(@user) %>

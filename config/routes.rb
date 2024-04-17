@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     delete "/logout" => "sessions#destroy", as: :logout
+    get 'profile', to: 'users#show', as: :profile # Rota e nome do caminho para o perfil do usuário
   end
 
   # Deslogado:
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :edit, :update, :destroy]
   end  
 
-  resources :users, only: [:show, :edit, :update] do
+  resources :users, only: [:new, :create, :edit, :update, :show] do
     member do
       get 'edit_password'
       patch 'update_password'
@@ -39,5 +40,4 @@ Rails.application.routes.draw do
 
   # Logado:
   resources :posts, except: [:index, :show]
-  resources :users, only: [:edit, :update]
 end

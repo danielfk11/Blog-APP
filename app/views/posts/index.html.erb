@@ -9,7 +9,7 @@
 <nav>
   <ul>
     <% if user_signed_in? %>
-      <li><%= link_to "Meus Posts", posts_path %></li>
+      <li><%= link_to "Meu Perfil", user_path(current_user) %></li>
       <li>
         <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
       </li>
