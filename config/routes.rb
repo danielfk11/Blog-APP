@@ -17,7 +17,12 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :edit, :update, :destroy]
   end  
 
-  resources :users, only: [:new, :create, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      get 'edit_password'
+      patch 'update_password'
+    end
+  end
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
@@ -36,4 +41,3 @@ Rails.application.routes.draw do
   resources :posts, except: [:index, :show]
   resources :users, only: [:edit, :update]
 end
-
