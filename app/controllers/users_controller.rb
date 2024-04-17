@@ -30,6 +30,30 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_password
+    @user = current_user
+  end
+
+  def update_password
+    @user = User.find(params[:id])
+  
+    # Verifica se a senha atual é válida
+    if @user.authenticate(params[:user][:current_password])
+      # Atualiza a senha
+      @user.password = params[:user][:new_password]
+      @user.password_confirmation = params[:user][:new_password_confirmation]
+  
+      if @user.save
+        redirect_to @user, notice: 'Senha atualizada com sucesso.'
+      else
+        render :edit_password
+      end
+    else
+      flash.now[:alert] = 'Senha atual inválida.'
+      render :edit_password
+    end
+  end
+
   private
 
   def user_params
