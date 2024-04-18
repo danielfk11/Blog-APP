@@ -9,7 +9,7 @@
 <nav>
   <ul>
     <% if user_signed_in? %>
-      <li><%= link_to "Meus Posts", posts_path %></li>
+      <li><%= link_to "Meu Perfil", user_path(current_user) %></li>
       <li>
         <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
       </li>
@@ -43,7 +43,7 @@
 <% @post.comments.each do |comment| %>
   <div>
     <p><strong><%= comment.anonymous ? 'Anônimo' : comment.user.username %>:</strong> <%= comment.content %></p>
-    <% if user_signed_in? && (comment.user == current_user || comment.anonymous) %>
+    <% if user_signed_in? && (comment.user == current_user) %>
       <%= form_for [@post, comment], method: :delete, remote: true, data: { confirm: 'Tem certeza que deseja remover este comentário?' } do |f| %>
         <%= f.submit 'Remover', class: 'btn btn-danger btn-sm' %>
       <% end %>

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/users/sign_in', to: redirect('/login')
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
