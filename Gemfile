@@ -20,6 +20,9 @@ gem 'will_paginate', '~> 3.3'
 # internacionalização
 gem 'rails-i18n'
 
+# Dotenv para ler credenciais (Twilio)
+gem 'dotenv'
+
 # SMS
 gem 'twilio-ruby'
 
