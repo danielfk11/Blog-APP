@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Seu Blog</title>
+  <title><%= t('posts.index.title') %></title>
 </head>
 <body>
 <%= csrf_meta_tags %>
@@ -9,33 +9,33 @@
 <nav>
   <ul>
     <% if user_signed_in? %>
-      <li><%= link_to "Meu Perfil", user_path(current_user) %></li>
+      <li><%= link_to t('posts.index.my_profile'), user_path(current_user) %></li>
       <li>
-        <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+        <%= button_to t('posts.index.logout'), logout_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Tem certeza?' } %>
       </li>
     <% else %>
-      <li><%= link_to "Login", login_path %></li>
-      <li><%= link_to "Cadastrar-se", new_user_path %></li>
+      <li><%= link_to t('posts.index.login'), login_path %></li>
+      <li><%= link_to t('posts.index.signup'), new_user_path %></li>
     <% end %>
   </ul>
 </nav>
 
-<h1>Lista de Posts</h1>
+<h1><%= t('posts.index.post_list_title') %></h1>
 
 <% if @posts.any? %>
   <% @posts.each do |post| %>
     <h2><%= "#{post.title}#{' (editado)' if post.edited?}" %></h2>
     <p><%= truncate(strip_tags(post.content), length: 200) %></p>
-    <p><%= link_to 'Ver mais', post %></p>
+    <p><%= link_to t('posts.index.see_more'), post %></p>
     <hr>
   <% end %>
 
   <%= will_paginate @posts %>
 <% else %>
-  <p>Ainda não há posts para mostrar. Seja o primeiro a criar um!</p>
+  <p><%= t('posts.index.no_posts_message') %></p>
 <% end %>
 
-<%= link_to 'Novo Post', new_post_path, class: 'btn btn-primary' if user_signed_in? %>
+<%= link_to t('posts.index.new_post_button'), new_post_path, class: 'btn btn-primary' if user_signed_in? %>
 
 </body>
 </html>

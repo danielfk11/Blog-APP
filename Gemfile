@@ -17,6 +17,9 @@ gem 'devise'
 # will_paginate for Paginate
 gem 'will_paginate', '~> 3.3'
 
+# internacionalização
+gem 'rails-i18n'
+
 # SMS
 gem 'twilio-ruby'
 

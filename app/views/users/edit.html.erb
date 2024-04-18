@@ -1,11 +1,11 @@
-<h1>Editar Cadastro</h1>
+<h1><%= t('users.edit.title') %></h1>
 
 <%= form_with model: @user, local: true do |form| %>
-  <%= form.label :username %>
+  <%= form.label :username, t('users.edit.username_label') %>
   <%= form.text_field :username %>
 
-  <%= form.label :email %>
+  <%= form.label :email, t('users.edit.email_label') %>
   <%= form.email_field :email %>
 
-  <%= form.submit 'Atualizar' %>
+  <%= form.submit t('users.edit.update_button') %>
 <% end %>

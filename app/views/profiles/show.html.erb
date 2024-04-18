@@ -1,19 +1,19 @@
-<h1>Meu Perfil</h1>
+<h1><%= t('profiles.show.title') %></h1>
 
-<p><strong>Username:</strong> <%= @user.username %></p>
-<p><strong>Email:</strong> <%= @user.email %></p>
-<p><strong>Phone Number:</strong> <%= @user.phone_number %></p>
+<p><strong><%= t('profiles.show.username_label') %>:</strong> <%= @user.username %></p>
+<p><strong><%= t('profiles.show.email_label') %>:</strong> <%= @user.email %></p>
+<p><strong><%= t('profiles.show.phone_label') %>:</strong> <%= @user.phone_number %></p>
 
-<h2>Meus Posts</h2>
+<h2><%= t('profiles.show.my_posts') %></h2>
 
 <ul>
   <% @user.posts.each do |post| %>
     <li>
       <%= link_to post.title, post_path(post) %>
-      <!-- Adicione outros detalhes do post, se necessário -->
+      <!-- Add other post details if necessary -->
     </li>
   <% end %>
 </ul>
 
-<%= link_to 'Editar Perfil', edit_user_path(@user) %> |
-<%= link_to 'Editar Senha', edit_password_user_path(@user) %>
+<%= link_to t('profiles.show.edit_profile_button'), edit_user_path(@user) %> |
+<%= link_to t('profiles.show.edit_password_button'), edit_password_user_path(@user) %>

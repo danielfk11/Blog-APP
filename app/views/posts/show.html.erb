@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= @post.title %></title>
+  <title><%= t('posts.show.title', title: @post.title) %></title>
 </head>
 <body>
 <%= csrf_meta_tags %>
@@ -9,68 +9,68 @@
 <nav>
   <ul>
     <% if user_signed_in? %>
-      <li><%= link_to "Meu Perfil", user_path(current_user) %></li>
+      <li><%= link_to t('posts.show.my_profile'), user_path(current_user) %></li>
       <li>
-        <%= button_to 'Logout', logout_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+        <%= button_to t('posts.show.logout'), logout_path, method: :delete, class: 'btn btn-danger', data: { confirm: 'Tem certeza?' } %>
       </li>
     <% else %>
-      <li><%= link_to "Login", login_path %></li>
-      <li><%= link_to "Cadastrar-se", new_user_path %></li>
+      <li><%= link_to t('posts.show.login'), login_path %></li>
+      <li><%= link_to t('posts.show.signup'), new_user_path %></li>
     <% end %>
   </ul>
 </nav>
 
-<h1><%= @post.title %></h1>
+<h1><%= t('posts.show.title', title: @post.title) %></h1>
 
 <p><%= @post.content %></p>
-<p>Criado por: <%= @post.user.username %></p>
-<p>Data de criação: <%= @post.created_at.strftime('%d/%m/%Y %H:%M') %></p>
+<p><%= t('posts.show.created_by', username: @post.user.username) %></p>
+<p><%= t('posts.show.creation_date', date: @post.created_at.strftime('%d/%m/%Y %H:%M')) %></p>
 
 <% if @post.updated_at != @post.created_at %>
-  <p style="color: red;">(editado)</p>
+  <p style="color: red;"><%= t('posts.show.edited') %></p>
 <% end %>
 
 <!-- Botão para apagar o post -->
 <% if user_signed_in? && @post.user == current_user %>
-  <%= button_to 'Apagar Post', @post, method: :delete, data: { confirm: 'Tem certeza que deseja apagar este post?' }, class: 'btn btn-danger' %>
+  <%= button_to t('posts.show.delete_post'), @post, method: :delete, data: { confirm: t('posts.show.delete_post_confirmation') }, class: 'btn btn-danger' %>
 <% end %>
 
-<%= link_to 'Editar', edit_post_path(@post) if user_signed_in? %>
-<%= link_to 'Voltar', posts_path %>
+<%= link_to t('posts.show.edit'), edit_post_path(@post) if user_signed_in? %>
+<%= link_to t('posts.show.back'), posts_path %>
 
-<h3>Tags:</h3>
+<h3><%= t('posts.show.tags_title') %></h3>
 <ul>
   <% @post.tags.each do |tag| %>
     <li><%= tag.name %></li>
   <% end %>
 </ul>
 
-<h2>Comentários</h2>
+<h2><%= t('posts.show.comments_title') %></h2>
 
 <% @post.comments.each do |comment| %>
   <div>
-    <p><strong><%= comment.anonymous ? 'Anônimo' : comment.user.username %>:</strong> <%= comment.content %></p>
+    <p><strong><%= comment.anonymous ? t('posts.show.anonymous') : comment.user.username %>:</strong> <%= comment.content %></p>
     <% if user_signed_in? && (comment.user == current_user) %>
-      <%= form_for [@post, comment], method: :delete, remote: true, data: { confirm: 'Tem certeza que deseja remover este comentário?' } do |f| %>
-        <%= form.submit 'Remover', class: 'btn btn-danger btn-sm' %>
+      <%= form_for [@post, comment], method: :delete, remote: true, data: { confirm: t('posts.show.remove_comment_confirmation') } do |form| %>
+        <%= form.submit t('posts.show.comment_button'), class: 'btn btn-danger btn-sm' %>
       <% end %>
     <% end %>
   </div>
 <% end %>
 
 <% if user_signed_in? %>
-  <h3>Adicionar Comentário</h3>
+  <h3><%= t('posts.show.add_comment_title') %></h3>
   <%= form_with model: [@post, @post.comments.build] do |form| %>
-    <%= form.text_area :content, placeholder: 'Seu comentário aqui...', class: 'form-control' %>
+    <%= form.text_area :content, placeholder: t('posts.show.comment_placeholder'), class: 'form-control' %>
     
     <!-- Checkbox para definir se o comentário é anônimo -->
     <%= form.check_box :anonymous %>
-    <%= form.label :anonymous, 'Comentar Anônimo' %>
+    <%= form.label :anonymous, t('posts.show.anonymous_comment') %>
     
-    <%= form.submit 'Comentar', class: 'btn btn-primary mt-2' %>
+    <%= form.submit t('posts.show.comment_button'), class: 'btn btn-primary mt-2' %>
   <% end %>
 <% else %>
-  <p>Por favor, faça login para comentar.</p>
+  <p><%= t('posts.show.login_to_comment') %></p>
 <% end %>
 
 </body>

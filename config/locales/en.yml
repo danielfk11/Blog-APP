@@ -1,31 +1,117 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  passwords:
+    edit:
+      email_label: "Email"
+      password_label: "Password"
+      password_confirmation_label: "Password Confirmation"
+      submit_button: "Update Password"
+    new:
+      title: "Forgot your password?"
+      phone_number_label: "Phone Number"
+      submit_button: "Send me reset password instructions"
+    verify_token:
+      title: "Verify Token"
+      email_label: "Email"
+      token_label: "Token"
+      submit_button: "Verify Token"
+  posts:
+    edit:
+      title: "Edit Post"
+      error_title: "Error!"
+      title_label: "Title"
+      content_label: "Content"
+      submit_button: "Save"
+    index:
+      title: "Your Blog"
+      my_profile: "My Profile"
+      logout: "Logout"
+      login: "Login"
+      signup: "Sign Up"
+      post_list_title: "Post List"
+      no_posts_message: "There are no posts to display yet. Be the first to create one!"
+      see_more: "See More"
+      new_post_button: "New Post"
+    new:
+      title: "Create New Post"
+      error_count_message: "%{count} errors occurred:"
+      title_label: "Title"
+      content_label: "Content"
+      tags_label: "Tags"
+      tags_placeholder: "Enter tags separated by commas"
+      create_button: "Create Post"
+      back_link: "Back"
+    show:
+      title: "%{title}"
+      my_profile: "My Profile"
+      logout: "Logout"
+      login: "Login"
+      signup: "Sign Up"
+      created_by: "Created by: %{username}"
+      creation_date: "Creation date: %{date}"
+      edited: "(edited)"
+      delete_post: "Delete Post"
+      delete_post_confirmation: "Are you sure you want to delete this post?"
+      edit: "Edit"
+      back: "Back"
+      tags_title: "Tags:"
+      comments_title: "Comments"
+      anonymous: "Anonymous"
+      remove_comment_confirmation: "Are you sure you want to remove this comment?"
+      add_comment_title: "Add Comment"
+      comment_placeholder: "Your comment here..."
+      anonymous_comment: "Comment Anonymously"
+      comment_button: "Comment"
+      login_to_comment: "Please log in to comment."
+  profiles:
+    edit:
+      title: "Edit Profile"
+      error: "error"
+      prohibited: "prohibited this user from being saved"
+      username_label: "Username"
+      email_label: "Email"
+      phone_label: "Phone Number"
+      save_button: "Save"
+      cancel_button: "Cancel"
+    show:
+      title: "My Profile"
+      username_label: "Username"
+      email_label: "Email"
+      phone_label: "Phone Number"
+      my_posts: "My Posts"
+      edit_profile_button: "Edit Profile"
+      edit_password_button: "Edit Password"
+  sessions:
+    new:
+      title: "Login"
+      email_label: "Email"
+      password_label: "Password"
+      login_button: "Login"
+      forgot_password_link: "Forgot your password?"
+  users:
+    edit_password:
+      title: "Change Password"
+      current_password_label: "Current Password"
+      new_password_label: "New Password"
+      confirm_new_password_label: "Confirm New Password"
+      submit_button: "Change Password"
+    edit:
+      title: "Edit Profile"
+      username_label: "Username"
+      email_label: "Email"
+      update_button: "Update"
+    new:
+      title: "Register"
+      username_label: "Username"
+      email_label: "Email"
+      phone_label: "Phone Number"
+      password_label: "Password"
+      password_confirmation_label: "Confirm Password"
+      register_button: "Register"
+    show:
+      title: "%{username}'s Profile"
+      email_label: "Email"
+      phone_label: "Phone Number"
+      user_posts_title: "User's Posts"
+      edit_profile_link: "Edit Profile"
+      edit_password_link: "Edit Password"
+      back_link: "Back"

@@ -1,9 +1,9 @@
-<h1>Criar Novo Post</h1>
+<h1><%= t('posts.new.title') %></h1>
 
 <%= form_with(model: @post, url: posts_path) do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> ocorreram:</h2>
+      <h2><%= t('posts.new.error_count_message', count: @post.errors.count) %></h2>
 
       <ul>
       <% @post.errors.full_messages.each do |message| %>
@@ -14,28 +14,28 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :title, t('posts.new.title_label') %>
     <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    <%= form.label :content %>
+    <%= form.label :content, t('posts.new.content_label') %>
     <%= form.text_area :content %>
   </div>
 
   <div class="field">
-  <%= form.label :tag_ids, 'Tags' %>
-  <%= form.collection_select :tag_ids, Tag.all, :id, :name, {}, multiple: true %>
+    <%= form.label :tag_ids, t('posts.new.tags_label') %>
+    <%= form.collection_select :tag_ids, Tag.all, :id, :name, {}, multiple: true %>
   </div>
 
   <div class="field">
-  <%= form.label :tag_names, 'Tags' %>
-  <%= form.text_field :tag_names, class: 'form-control', placeholder: 'Insira as tags separadas por vírgula' %>
+    <%= form.label :tag_names, t('posts.new.tags_label') %>
+    <%= form.text_field :tag_names, class: 'form-control', placeholder: t('posts.new.tags_placeholder') %>
   </div>
 
   <div class="actions">
-    <%= form.submit 'Criar Post' %>
+    <%= form.submit t('posts.new.create_button') %>
   </div>
 <% end %>
 
-<%= link_to 'Voltar', posts_path %>
+<%= link_to t('posts.new.back_link'), posts_path %>

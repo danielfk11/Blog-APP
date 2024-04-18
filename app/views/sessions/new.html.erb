@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title><%= t('sessions.new.title') %></title>
 </head>
 <body>
 
-<h1>Login</h1>
+<h1><%= t('sessions.new.title') %></h1>
 
 <%= form_for(@user, as: :user, url: session_path(:user)) do |form| %>
-  <%= form.label :email %>
+  <%= form.label :email, t('sessions.new.email_label') %>
   <%= form.email_field :email, autofocus: true %>
 
-  <%= form.label :password %>
+  <%= form.label :password, t('sessions.new.password_label') %>
   <%= form.password_field :password %>
 
-  <%= form.submit 'Login' %>
+  <%= form.submit t('sessions.new.login_button') %>
 <% end %>
 
 <p>
-<%= link_to 'Esqueceu sua senha?', forgot_password_path %>
+<%= link_to t('sessions.new.forgot_password_link'), forgot_password_path %>
 </p>
 
 </body>
