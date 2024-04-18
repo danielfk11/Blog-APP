@@ -23,6 +23,16 @@
     <%= form.text_area :content %>
   </div>
 
+  <div class="field">
+  <%= form.label :tag_ids, 'Tags' %>
+  <%= form.collection_select :tag_ids, Tag.all, :id, :name, {}, multiple: true %>
+  </div>
+
+  <div class="field">
+  <%= form.label :tag_names, 'Tags' %>
+  <%= form.text_field :tag_names, class: 'form-control', placeholder: 'Insira as tags separadas por vírgula' %>
+  </div>
+
   <div class="actions">
     <%= form.submit 'Criar Post' %>
   </div>

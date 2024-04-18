@@ -3,8 +3,14 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all.order(created_at: :desc).paginate(page: params[:page], per_page: 3)
+    if params[:tag]
+      @tag = Tag.find_by(name: params[:tag])
+      @posts = @tag.posts.order(created_at: :desc).paginate(page: params[:page], per_page: 3)
+    else
+      @posts = Post.all.order(created_at: :desc).paginate(page: params[:page], per_page: 3)
+    end
   end
+  
 
   def show
   end
@@ -57,8 +63,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :tag_ids, tag_ids: [])
   end
 end

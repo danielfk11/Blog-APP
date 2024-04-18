@@ -38,6 +38,13 @@
 <%= link_to 'Editar', edit_post_path(@post) if user_signed_in? %>
 <%= link_to 'Voltar', posts_path %>
 
+<h3>Tags:</h3>
+<ul>
+  <% @post.tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>
+
 <h2>Comentários</h2>
 
 <% @post.comments.each do |comment| %>
@@ -45,7 +52,7 @@
     <p><strong><%= comment.anonymous ? 'Anônimo' : comment.user.username %>:</strong> <%= comment.content %></p>
     <% if user_signed_in? && (comment.user == current_user) %>
       <%= form_for [@post, comment], method: :delete, remote: true, data: { confirm: 'Tem certeza que deseja remover este comentário?' } do |f| %>
-        <%= f.submit 'Remover', class: 'btn btn-danger btn-sm' %>
+        <%= form.submit 'Remover', class: 'btn btn-danger btn-sm' %>
       <% end %>
     <% end %>
   </div>
