@@ -59,11 +59,20 @@ class PostsController < ApplicationController
   private
 
   def assign_tags_to_post
-    return unless params[:post][:tag_names].present?
-
-    tag_names = params[:post][:tag_names].split(',')
-    @post.tags = tag_names.map do |name|
-      Tag.where(name: name.strip).first_or_create!
+    return unless params[:post][:tag_ids].present? || params[:post][:tag_names].present?
+  
+    if params[:post][:tag_ids].present?
+      tag_ids = params[:post][:tag_ids].reject(&:empty?)
+      @post.tag_ids = tag_ids
+    end
+  
+    if params[:post][:tag_names].present?
+      tag_names = params[:post][:tag_names].split(',').map(&:strip)
+  
+      tag_names.each do |name|
+        tag = Tag.where(name: name).first_or_create!
+        @post.tags << tag unless @post.tags.include?(tag)
+      end
     end
   end
 
