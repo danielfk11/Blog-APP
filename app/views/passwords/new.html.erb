@@ -1,14 +1,16 @@
-<h2>Forgot your password?</h2>
+<div style="text-align: center; margin-bottom: 30px;">
+  <h2 style="font-size: 24px; color: #333; margin-bottom: 20px;">Forgot your password?</h2>
 
-<form class="new_user" id="new_user" action="/forgot_password" accept-charset="UTF-8" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+  <form class="new_user" id="new_user" action="/forgot_password" accept-charset="UTF-8" method="post" style="max-width: 400px; margin: 0 auto;">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
 
-  <div class="field">
-    <label for="user_phone_number">Phone Number</label><br />
-    <input autofocus="autofocus" autocomplete="tel" type="tel" name="phone_number" id="user_phone_number" />
-  </div>
+    <div style="margin-bottom: 20px;">
+      <label for="user_phone_number" style="display: block; font-weight: bold; color: #333; margin-bottom: 10px;">Phone Number</label>
+      <input autofocus="autofocus" autocomplete="tel" type="tel" name="phone_number" id="user_phone_number" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;">
+    </div>
 
-  <div class="actions">
-    <input type="submit" name="commit" value="Send me reset password instructions" data-disable-with="Send me reset password instructions" />
-  </div>
-</form>
+    <div style="margin-bottom: 30px;">
+      <input type="submit" name="commit" value="Send me reset password instructions" data-disable-with="Send me reset password instructions" style="background-color: #1da1f2; color: #fff; padding: 12px 20px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease; width: 100%;">
+    </div>
+  </form>
+</div>

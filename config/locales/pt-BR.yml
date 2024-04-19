@@ -56,6 +56,7 @@ pt-BR:
       tags_title: "Tags:"
       comments_title: "Comentários"
       anonymous: "Anônimo"
+      comment_button_delete: "Apagar comentário"
       remove_comment_confirmation: "Tem certeza que deseja remover este comentário?"
       add_comment_title: "Adicionar Comentário"
       comment_placeholder: "Seu comentário aqui..."

@@ -1,6 +1,6 @@
 <%= form_with(model: @user, url: reset_password_path, method: :patch) do |form| %>
   <% if @user.errors.any? %>
-    <div class="alert alert-danger">
+    <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 4px; margin-bottom: 20px;">
       <ul>
         <% @user.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -9,22 +9,22 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= form.label :email, t('passwords.edit.email_label') %>
-    <%= form.email_field :email, class: 'form-control' %>
+  <div style="margin-bottom: 25px;">
+    <%= form.label :email, t('passwords.edit.email_label'), style: "display: block; margin-bottom: 10px; font-weight: bold; color: #333;" %>
+    <%= form.email_field :email, class: 'form-control', style: "width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :password, t('passwords.edit.password_label') %>
-    <%= form.password_field :password, class: 'form-control' %>
+  <div style="margin-bottom: 25px;">
+    <%= form.label :password, t('passwords.edit.password_label'), style: "display: block; margin-bottom: 10px; font-weight: bold; color: #333;" %>
+    <%= form.password_field :password, class: 'form-control', style: "width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :password_confirmation, t('passwords.edit.password_confirmation_label') %>
-    <%= form.password_field :password_confirmation, class: 'form-control' %>
+  <div style="margin-bottom: 25px;">
+    <%= form.label :password_confirmation, t('passwords.edit.password_confirmation_label'), style: "display: block; margin-bottom: 10px; font-weight: bold; color: #333;" %>
+    <%= form.password_field :password_confirmation, class: 'form-control', style: "width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;" %>
   </div>
 
-  <div class="form-group">
-    <%= form.submit t('passwords.edit.submit_button'), class: 'btn btn-primary' %>
+  <div style="margin-bottom: 25px;">
+    <%= form.submit t('passwords.edit.submit_button'), class: 'btn btn-primary', style: "background-color: #1da1f2; color: #fff; padding: 12px 20px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;" %>
   </div>
 <% end %>

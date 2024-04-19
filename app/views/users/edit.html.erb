@@ -1,3 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title style="font-family: 'Helvetica Neue', Arial, sans-serif;"><%= t('users.edit.title') %></title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      background-color: #1da1f2;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type="submit"] {
+      background-color: #1da1f2;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover {
+      background-color: #0d8bf2;
+    }
+  </style>
+</head>
+<body>
+
 <h1><%= t('users.edit.title') %></h1>
 
 <%= form_with model: @user, local: true do |form| %>
@@ -9,3 +53,6 @@
 
   <%= form.submit t('users.edit.update_button') %>
 <% end %>
+
+</body>
+</html>

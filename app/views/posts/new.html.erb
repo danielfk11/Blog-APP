@@ -1,14 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title style="font-family: 'Helvetica Neue', Arial, sans-serif;"><%= t('posts.new.title') %></title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      background-color: #1da1f2;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+    #error_explanation {
+      background-color: #ff4d4d;
+      color: white;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    #error_explanation h2 {
+      margin-top: 0;
+      color: white;
+    }
+    #error_explanation ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #error_explanation ul li {
+      margin-bottom: 5px;
+    }
+    .field {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="textarea"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .actions {
+      margin-top: 20px;
+    }
+    .btn {
+      background-color: #1da1f2;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background-color: #0d8bf2;
+    }
+  </style>
+</head>
+<body>
+
 <h1><%= t('posts.new.title') %></h1>
 
 <%= form_with(model: @post, url: posts_path) do |form| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= t('posts.new.error_count_message', count: @post.errors.count) %></h2>
-
       <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -34,8 +104,10 @@
   </div>
 
   <div class="actions">
-    <%= form.submit t('posts.new.create_button') %>
+    <%= link_to t('posts.new.back_link'), posts_path, class: 'btn' %>
+    <%= form.submit t('posts.new.create_button'), class: 'btn' %>
   </div>
 <% end %>
 
-<%= link_to t('posts.new.back_link'), posts_path %>
+</body>
+</html>

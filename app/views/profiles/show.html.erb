@@ -1,3 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title style="font-family: 'Helvetica Neue', Arial, sans-serif;"><%= t('profiles.show.title') %></title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      background-color: #1da1f2;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+    strong {
+      color: #1da1f2;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 10px;
+      margin: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .btn {
+      background-color: #1da1f2;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background-color: #0d8bf2;
+    }
+  </style>
+</head>
+<body>
+
 <h1><%= t('profiles.show.title') %></h1>
 
 <p><strong><%= t('profiles.show.username_label') %>:</strong> <%= @user.username %></p>
@@ -9,11 +55,14 @@
 <ul>
   <% @user.posts.each do |post| %>
     <li>
-      <%= link_to post.title, post_path(post) %>
+      <%= link_to post.title, post_path(post), style: 'color: #1da1f2; text-decoration: none;' %>
       <!-- Add other post details if necessary -->
     </li>
   <% end %>
 </ul>
 
-<%= link_to t('profiles.show.edit_profile_button'), edit_user_path(@user) %> |
-<%= link_to t('profiles.show.edit_password_button'), edit_password_user_path(@user) %>
+<%= link_to t('profiles.show.edit_profile_button'), edit_user_path(@user), class: 'btn btn-primary' %> |
+<%= link_to t('profiles.show.edit_password_button'), edit_password_user_path(@user), class: 'btn btn-secondary' %>
+
+</body>
+</html>

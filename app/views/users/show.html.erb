@@ -1,3 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title style="font-family: 'Helvetica Neue', Arial, sans-serif;"><%= t('users.show.title', username: @user.username) %></title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      background-color: #1da1f2;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+    p {
+      margin-top: 10px;
+      color: #333;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin-top: 5px;
+    }
+    a {
+      text-decoration: none;
+      color: #1da1f2;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #0d8bf2;
+    }
+  </style>
+</head>
+<body>
+
 <h1><%= t('users.show.title', username: @user.username) %></h1>
 
 <p><%= t('users.show.email_label') %>: <%= @user.email %></p>
@@ -13,3 +53,6 @@
 <%= link_to t('users.show.edit_profile_link'), edit_user_path(@user) %> |
 <%= link_to t('users.show.edit_password_link'), edit_password_user_path(@user) %> |
 <%= link_to t('users.show.back_link'), root_path %>
+
+</body>
+</html>

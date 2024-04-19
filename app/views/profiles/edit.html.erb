@@ -1,3 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title style="font-family: 'Helvetica Neue', Arial, sans-serif;"><%= t('profiles.edit.title') %></title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      background-color: #1da1f2;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+    #error_explanation {
+      background-color: #f44336;
+      color: white;
+      padding: 10px;
+      margin: 10px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 5px;
+      margin: 5px;
+    }
+    .form-group {
+      padding: 10px;
+      margin: 10px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .btn {
+      background-color: #1da1f2;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #0d8bf2;
+    }
+  </style>
+</head>
+<body>
+
 <h1><%= t('profiles.edit.title') %></h1>
 
 <%= form_with(model: @user, url: user_path(@user), method: :patch) do |form| %>
@@ -12,24 +70,27 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="form-group">
     <%= form.label :username, t('profiles.edit.username_label') %>
-    <%= form.text_field :username %>
+    <%= form.text_field :username, class: 'form-control' %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :email, t('profiles.edit.email_label') %>
-    <%= form.text_field :email %>
+    <%= form.text_field :email, class: 'form-control' %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :phone_number, t('profiles.edit.phone_label') %>
-    <%= form.text_field :phone_number %>
+    <%= form.text_field :phone_number, class: 'form-control' %>
   </div>
 
-  <div>
-    <%= form.submit t('profiles.edit.save_button') %>
+  <div class="form-group">
+    <%= form.submit t('profiles.edit.save_button'), class: 'btn btn-primary' %>
   </div>
 <% end %>
 
-<%= link_to t('profiles.edit.cancel_button'), user_path(@user) %>
+<%= link_to t('profiles.edit.cancel_button'), user_path(@user), class: 'btn btn-secondary' %>
+
+</body>
+</html>

@@ -1,7 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= t('posts.index.title') %></title>
+  <title style="font-family: 'Helvetica Neue', Arial, sans-serif;"><%= t('posts.index.title') %></title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      background-color: #333;
+      overflow: hidden;
+    }
+    nav ul li {
+      float: left;
+      margin-right: 20px;
+    }
+    nav ul li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    nav ul li a:hover {
+      background-color: #555;
+    }
+    h1 {
+      background-color: #1da1f2;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+    h2 {
+      margin-top: 20px;
+      color: #333;
+    }
+    p {
+      margin-bottom: 10px;
+      color: #666;
+    }
+    .btn {
+      background-color: #1da1f2;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background-color: #0d8bf2;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+    .pagination {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
 <%= csrf_meta_tags %>
@@ -26,11 +89,11 @@
   <% @posts.each do |post| %>
     <h2><%= "#{post.title}#{' (editado)' if post.edited?}" %></h2>
     <p><%= truncate(strip_tags(post.content), length: 200) %></p>
-    <p><%= link_to t('posts.index.see_more'), post %></p>
+    <p><%= link_to t('posts.index.see_more'), post, class: 'btn' %></p>
     <hr>
   <% end %>
 
-  <%= will_paginate @posts %>
+  <%= will_paginate @posts, class: 'pagination' %>
 <% else %>
   <p><%= t('posts.index.no_posts_message') %></p>
 <% end %>
