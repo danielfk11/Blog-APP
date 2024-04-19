@@ -18,36 +18,31 @@ class PostsController < ApplicationController
     @post = Post.new
   end
   
-def create
-  if params[:post][:file].present?
-    file_content = params[:post][:file].read
+  def create
+    if params[:post][:file].present?
+      # Salve o arquivo em algum local temporário
+      uploaded_file = params[:post][:file]
+      file_path = Rails.root.join('tmp', uploaded_file.original_filename)
+      File.open(file_path, 'wb') do |file|
+        file.write(uploaded_file.read)
+      end
   
-    puts file_content
+      # Chame o worker do Sidekiq para processar o arquivo em background
+      ProcessFileWorker.perform_async(file_path.to_s, current_user.id)  # Convertendo para string aqui
   
-    lines = file_content.split("\n")
-    
-    params[:post][:title] = lines.first.to_s.chomp
-    params[:post][:content] = lines[1].to_s.chomp  
-    params[:post][:tag_names] = lines[2].to_s.chomp 
+      redirect_to posts_path, notice: 'Arquivo em processamento. Posts serão criados em breve.'
+    else
+      @post = current_user.posts.build(post_params)
   
-    @post = current_user.posts.build(
-      title: lines.first.to_s.chomp,
-      content: lines[1].to_s.chomp,
-      tag_names: lines[2].to_s.chomp
-    )
-  else
-    @post = current_user.posts.build(post_params)
+      if @post.save
+        assign_tags_to_post
+        redirect_to @post, notice: 'Post criado com sucesso!'
+      else
+        render :new
+      end
+    end
   end
-
-  if @post.save
-    assign_tags_to_post
-    redirect_to @post, notice: 'Post criado com sucesso!'
-  else
-    render :new
-  end
-end
-
-  
+   
   def edit
     @post = current_user.posts.find_by(id: params[:id])
     unless @post
