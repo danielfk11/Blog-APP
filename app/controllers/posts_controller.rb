@@ -18,38 +18,35 @@ class PostsController < ApplicationController
     @post = Post.new
   end
   
-  def create
-    if params[:post][:file].present?
-      file_content = params[:post][:file].read
-      
-      # Imprimir o conteúdo do arquivo
-      puts "File content:"
-      puts file_content
-      
-      # Dividindo o conteúdo do arquivo em linhas
-      lines = file_content.split("\n")
-      
-      # Definindo os atributos diretamente nos parâmetros do post
-      params[:post][:title] = lines.first.to_s.chomp
-      params[:post][:content] = lines[1..-1].join("\n").chomp  # excluindo as tags
-      
-      @post = current_user.posts.build(
-        title: params[:post][:title],
-        content: params[:post][:content]
-      )
-    else
-      @post = current_user.posts.build(post_params)
-    end
+def create
+  if params[:post][:file].present?
+    file_content = params[:post][:file].read
   
-    if @post.save
-      assign_tags_to_post  # Se você quiser adicionar tags mais tarde, pode manter esta linha
-      redirect_to @post, notice: 'Post criado com sucesso!'
-    else
-      render :new
-    end
+    puts file_content
+  
+    lines = file_content.split("\n")
+    
+    params[:post][:title] = lines.first.to_s.chomp
+    params[:post][:content] = lines[1].to_s.chomp  
+    params[:post][:tag_names] = lines[2].to_s.chomp 
+  
+    @post = current_user.posts.build(
+      title: lines.first.to_s.chomp,
+      content: lines[1].to_s.chomp,
+      tag_names: lines[2].to_s.chomp
+    )
+  else
+    @post = current_user.posts.build(post_params)
   end
-  
-  
+
+  if @post.save
+    assign_tags_to_post
+    redirect_to @post, notice: 'Post criado com sucesso!'
+  else
+    render :new
+  end
+end
+
   
   def edit
     @post = current_user.posts.find_by(id: params[:id])
