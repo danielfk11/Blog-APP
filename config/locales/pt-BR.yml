@@ -37,6 +37,7 @@ pt-BR:
       title_label: "Título"
       content_label: "Conteúdo"
       tags_label: "Tags"
+      file_label: "Enviar arquivo"
       tags_placeholder: "Insira as tags separadas por vírgula"
       create_button: "Criar Post"
       back_link: "Voltar"

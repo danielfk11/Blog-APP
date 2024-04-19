@@ -23,6 +23,8 @@ gem 'rails-i18n'
 # Dotenv para ler credenciais (Twilio)
 gem 'dotenv'
 
+gem 'sidekiq'
+
 group :development, :test do
   gem 'rspec-rails', '~> 5.0'
   gem 'rails-controller-testing'

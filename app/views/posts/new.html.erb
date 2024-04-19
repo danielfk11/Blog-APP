@@ -103,6 +103,12 @@
     <%= form.text_field :tag_names, class: 'form-control', placeholder: t('posts.new.tags_placeholder') %>
   </div>
 
+  <div class="field">
+  <%= form.label :file, t('posts.new.file_label') %>
+  <%= form.file_field :file, class: 'form-control' %>
+  </div>
+
+
   <div class="actions">
     <%= link_to t('posts.new.back_link'), posts_path, class: 'btn' %>
     <%= form.submit t('posts.new.create_button'), class: 'btn' %>
