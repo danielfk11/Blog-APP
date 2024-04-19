@@ -23,6 +23,14 @@ gem 'rails-i18n'
 # Dotenv para ler credenciais (Twilio)
 gem 'dotenv'
 
+group :development, :test do
+  gem 'rspec-rails', '~> 5.0'
+  gem 'rails-controller-testing'
+end
+
+gem 'shoulda-matchers', '~> 5.0'
+gem 'factory_bot_rails'
+
 # SMS
 gem 'twilio-ruby'
 

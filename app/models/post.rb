@@ -4,10 +4,13 @@ class Post < ApplicationRecord
   has_many :post_tags
   has_many :tags, through: :post_tags
 
+  validates :title, presence: true
+  validates :content, presence: true
+
   def edited?
     updated_at != created_at
   end
-
+  
   attr_accessor :tag_names
 
   after_save :assign_tags

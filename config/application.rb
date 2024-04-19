@@ -11,7 +11,7 @@ module BlogApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
     
-    config.i18n.default_locale = :'en' 
+    config.i18n.default_locale = :'pt-BR' 
     config.autoload_paths << Rails.root.join('lib')
 
     # Configuration for the application, engines, and railties goes here.
